@@ -1,0 +1,30 @@
+# Java & Maven Build Output
+target/
+build/
+out/
+*.class
+
+# IntelliJ IDE Files
+.idea/
+*.iml
+
+# Python / VS Code (Just in case)
+.venv/
+venv/
+__pycache__/
+.vscode/
+
+# OS Junk
+.DS_Store
+*.log
+
+# Pluralsight Specific
+Course_Documents
+*-info.yaml
+*-remote-info.yaml
+task.html
+.courseignore
+GlobalTests.java
+SystemOutput.java
+*/test/
+src/test/
