@@ -3,7 +3,7 @@ package com.pluralsight;
 import java.util.Scanner;
 
 /**
- * Workkbook-1c: Exercises – Basic Calculator
+ * Workbook-1c: Exercises – Basic Calculator
  * EXERCISE 5 - pg 88
  **/
 
@@ -38,7 +38,7 @@ public class Main {
                 First Name: %s
                 Hours Worked: %.2f
                 Pay Rate: %.2f
-                OverTime Payrate: %b
+                OverTime Pay Rate: %b
                 Gross Pay: %.2f""", firstName, hoursWorked, payRate, isOvertime, grossPay);
 
     }
