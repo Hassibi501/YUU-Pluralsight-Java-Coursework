@@ -28,3 +28,14 @@ GlobalTests.java
 SystemOutput.java
 */test/
 src/test/
+
+# AI & Copilot Files
+AGENTS.md
+agents.md
+*agent*.md
+.agents/
+agents/
+.copilot/
+*copilot*.md
+.junie/
+
