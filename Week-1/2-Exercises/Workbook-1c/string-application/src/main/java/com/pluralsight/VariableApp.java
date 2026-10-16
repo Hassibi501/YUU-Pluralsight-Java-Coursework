@@ -12,20 +12,22 @@ public class VariableApp {
         int classStartYear = 2026;
         char middleInitial = 'N';
         boolean hasPets = false;
-        String niceMessage = "YOUR NICE MESSAGE OR SAYING";
+        String niceMessage = "You are doing great!";
 
         System.out.printf("""
                 My favorite color is %s.
                 I started this class in %d.
                 My middle initial is %c.
                 I have pets: %b.
-                A nice message is: %s.
+                Nice message: %s.
                 """,
                 favoriteColor, classStartYear, middleInitial, hasPets, niceMessage);
 
+        System.out.println();
+
         int daysInWeek = 7;
         double coffeePrice = 4.99;
-        char favoriteLetter = 'J';
+        char favoriteLetter = 'H';
         boolean isRaining = false;
 
         System.out.printf("""
