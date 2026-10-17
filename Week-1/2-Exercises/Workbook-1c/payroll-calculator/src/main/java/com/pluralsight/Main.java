@@ -5,6 +5,7 @@ import java.util.Scanner;
 /**
  * Workbook-1c: Exercises – Basic Calculator
  * EXERCISE 5 - pg 88
+ * Refactored code for Exercises – Calculator with Methods  - EXERCISE 2 - pg 120
  **/
 
 public class Main {
@@ -20,19 +21,31 @@ public class Main {
         System.out.println("Enter pay rate: ");
         float payRate = scanner.nextFloat();
 
-        float grossPay = hoursWorked * payRate;
+        float grossPay = calculateGrossPay(hoursWorked, payRate);
+        boolean isOvertime = hoursWorked >= 40;
 
-        boolean isOvertime = false;
+        System.out.println();
+
+        displayPaychecKSummary(firstName, hoursWorked, payRate, isOvertime, grossPay);
+
+        scanner.close();
+
+
+    }
+
+    public static float calculateGrossPay(float hoursWorked, float payRate) {
+        float grossPay = hoursWorked * payRate;
 
         if (hoursWorked >= 40){
             float overtimeHours = hoursWorked - 40;
             float overtimePay = overtimeHours * payRate * 1.5f;
             grossPay = (40 * payRate) + overtimePay;
-            isOvertime = true;
         }
 
-        System.out.println();
+        return grossPay;
+    }
 
+    public static void displayPaychecKSummary(String firstName, float hoursWorked, float payRate,boolean isOvertime, float grossPay) {
         System.out.printf("""
                 Employee Paycheck:
                 First Name: %s
@@ -40,6 +53,6 @@ public class Main {
                 Pay Rate: %.2f
                 OverTime Pay Rate: %b
                 Gross Pay: %.2f""", firstName, hoursWorked, payRate, isOvertime, grossPay);
-
     }
+
 }
