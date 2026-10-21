@@ -54,4 +54,8 @@ public class CellPhone {
     public void setOwnersName(String ownersName) {
         this.ownersName = ownersName;
     }
+
+    public void dial(String phoneNumber) {
+        System.out.println(this.ownersName + "'s phone is calling " + phoneNumber);
+    }
 }
