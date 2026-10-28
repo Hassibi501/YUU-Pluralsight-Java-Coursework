@@ -13,71 +13,61 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String fileName;
 
 
         while (true) {
-            try {
-                System.out.println("""
-                ===== Bedtime Stories =====
-                1. Goldilocks and the Three Bears
-                2. Hansel and Gretel
-                3. Mary Had a Little Lamb
-                4. Exit""");
+            System.out.println("""
+            ===== Bedtime Stories =====
+            1. Goldilocks and the Three Bears
+            2. Hansel and Gretel
+            3. Mary Had a Little Lamb
+            4. Exit""");
 
-                int choice = Integer.parseInt(scanner.nextLine());
-                System.out.println();
+            String choiceString = scanner.nextLine();
 
-                switch (choice) {
-                    case 1:
-                        fileName = "goldilocks.txt";
-                        FileReader fileReader1 = new FileReader(fileName);
-                        BufferedReader bufferedReader1 = new BufferedReader(fileReader1);
-
-                        String input1;
-                        while ((input1 = bufferedReader1.readLine()) != null) {
-                            System.out.println(input1);
-                        }
-                        bufferedReader1.close();
-                        System.out.println();
-                        break;
-                    case 2:
-                        fileName = "hansel_and_gretel.txt";
-                        FileReader fileReader2 = new FileReader(fileName);
-                        BufferedReader bufferedReader2 = new BufferedReader(fileReader2);
-
-                        String input2;
-                        while ((input2 = bufferedReader2.readLine()) != null) {
-                            System.out.println(input2);
-                        }
-                        bufferedReader2.close();
-                        System.out.println();
-                        break;
-                    case 3:
-                        fileName = "mary_had_a_little_lamb.txt";
-                        FileReader fileReader3 = new FileReader(fileName);
-                        BufferedReader bufferedReader3 = new BufferedReader(fileReader3);
-
-                        String input3;
-                        while ((input3 = bufferedReader3.readLine()) != null) {
-                            System.out.println(input3);
-                        }
-                        bufferedReader3.close();
-                        System.out.println();
-                        break;
-                    case 4:
-                        System.out.println("Exiting the application. Goodbye!");
-                        scanner.close();
-                        return;
-                    default:
-                        System.out.println("Invalid choice. Please select a number between 1 and 3.");
-                }
+            if (!choiceString.matches("[1-4]")) {
+                System.out.println("Invalid choice. Please select a number between 1 and 4.\n");
+                continue;
             }
-            catch (IOException e) {
-                e.printStackTrace();
+
+
+            int choice = Integer.parseInt(choiceString);
+
+            if (choice == 4) {
+                System.out.println("Exiting the application. Goodbye!");
+                scanner.close();
+                return;
             }
+
+
+            System.out.println();
+
+           String fileName = switch (choice) {
+                case 1 -> "goldilocks.txt";
+                case 2 -> "hansel_and_gretel.txt";
+                case 3 -> "mary_had_a_little_lamb.txt";
+                default -> throw new IllegalStateException("Unexpected value: " + choice);
+            };//switch
+
+
+            readStoryFromFile(fileName);
+            System.out.println();
+
+        }//while
+
         }
 
-
+    public static void readStoryFromFile(String fileName) {
+        int counter = 1;
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                System.out.println(counter + ". " + line);
+                counter++;
+            }
+        } catch (IOException e) {
+            System.out.println("Error reading file: " + fileName);
+            e.printStackTrace();
+        }
     }
 }
