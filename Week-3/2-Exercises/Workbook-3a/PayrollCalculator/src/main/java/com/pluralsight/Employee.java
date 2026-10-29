@@ -6,6 +6,7 @@ public class Employee {
     private double hoursWorked;
     private double payRate;
 
+
     public Employee(int employeeId, String name, double hoursWorked, double payRate) {
         this.employeeId = employeeId;
         this.name = name;
@@ -21,7 +22,15 @@ public class Employee {
         return name;
     }
 
+    public double getHoursWorked() {
+        return hoursWorked;
+    }
+
+    public double getPayRate() {
+        return payRate;
+    }
+
     public double getGrossPay() {
-        return this.hoursWorked * this.payRate;
+        return getHoursWorked() * getPayRate();
     }
 }

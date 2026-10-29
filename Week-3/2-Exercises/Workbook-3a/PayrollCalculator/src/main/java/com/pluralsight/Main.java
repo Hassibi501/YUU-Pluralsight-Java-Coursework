@@ -1,52 +1,53 @@
 package com.pluralsight;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+
 
 /**
  * Workbook-3a: Exercises — Payroll Calculator
  * EXERCISE 3 - pg 15
+ * Exercises — Payroll Calculator Pt. 2
+ * EXERCISE 1 - pg 23
  */
 
 public class Main {
     public static void main(String[] args) {
-        String filename = "employees.csv";
+        String inputFilename = "employees.csv";
+        String outputFilename = "payroll.csv";
 
-        try {
-            FileReader fileReader = new FileReader(filename);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(inputFilename));
+             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(outputFilename))) {
 
-            String input;
+            bufferedReader.readLine();
 
-            bufferedReader.readLine();// Skip the header line
+            bufferedWriter.write("id|name|gross pay\n");
 
-            System.out.println("===== Employee Payroll Report =====\n------------------------");
-            while ((input = bufferedReader.readLine()) != null) {
-                String[] employeeData = input.split("\\|");
+            String line;
+            System.out.println("==== Employee Data ====");
+            while ((line = bufferedReader.readLine()) != null) {
+                String outPutFileDate = getOutPutFileData(line);
+                bufferedWriter.write(outPutFileDate);
 
-                int employeeId = Integer.parseInt(employeeData[0]);
-                String name = employeeData[1];
-                double hoursWorked = Double.parseDouble(employeeData[2]);
-                double payRate = Double.parseDouble(employeeData[3]);
+                System.out.println(line);
 
-                Employee employee = new Employee(employeeId, name, hoursWorked, payRate);
-
-                System.out.printf("""
-                        Employee ID: %d
-                        Name: %s
-                        Gross Pay: $%.2f
-                        ------------------------
-                        """,
-                        employee.getEmployeeId(), employee.getName(), employee.getGrossPay());
 
             }
-            bufferedReader.close();
-
         }
         catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    private static String getOutPutFileData(String line) {
+        String[] fields = line.split("\\|");
+
+        int employeeId = Integer.parseInt(fields[0]);
+        String name = fields[1];
+        double hoursWorked = Double.parseDouble(fields[2]);
+        double payRate = Double.parseDouble(fields[3]);
+
+        Employee employee = new Employee(employeeId, name, hoursWorked, payRate);
+
+        return String.format("%d|%s|%.2f\n", employee.getEmployeeId(), employee.getName(), employee.getGrossPay());
     }
 }
