@@ -6,6 +6,8 @@ public class Employee {
     private String department;
     private double payRate;
     private double hoursWorked;
+    private int startTime;
+    private boolean isClockedIn;
 
     public Employee(String employeeID, String name, String department, double payRate, double hoursWorked) {
         this.employeeID = employeeID;
@@ -35,7 +37,19 @@ public class Employee {
         return hoursWorked;
     }
 
-    public int punchTimeCard(int startTime, int endTime) {
-        return endTime - startTime;
+
+    public void punchTimeCard(int time) {
+        if (!this.isClockedIn) {
+            this.startTime = time;
+            this.isClockedIn = true;
+        }
+        else {
+            int newHoursWorked = time - this.startTime;
+            this.hoursWorked += newHoursWorked;
+            this.startTime = 0;
+            this.isClockedIn = false;
+        }
     }
+
+
 }
