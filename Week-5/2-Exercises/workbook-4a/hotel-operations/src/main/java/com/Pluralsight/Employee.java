@@ -34,4 +34,8 @@ public class Employee {
     public double getHoursWorked() {
         return hoursWorked;
     }
+
+    public int punchTimeCard(int startTime, int endTime) {
+        return endTime - startTime;
+    }
 }

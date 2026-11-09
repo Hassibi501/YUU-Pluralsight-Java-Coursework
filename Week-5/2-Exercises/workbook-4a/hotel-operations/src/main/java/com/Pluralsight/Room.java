@@ -34,4 +34,21 @@ public class Room {
     public boolean isAvailable() {
         return isAvailable;
     }
+
+    public void checkIn() {
+        this.isOccupied = true;
+        this.isDirty = true;
+        this.isAvailable = false;
+
+    }
+    public void checkOut() {
+        this.isOccupied = false;
+        this.isAvailable = false;
+    }
+    public boolean cleanRoom() {
+        this.isOccupied = false;
+        this.isAvailable = true;
+        return this.isDirty = false;
+
+    }
 }
