@@ -4,13 +4,10 @@ public class Reservation {
     private EnumRoomTypes roomType;
     private int numberOfNights;
     private boolean isWeekend;
-    private double reservationTotal;
 
-    public Reservation(EnumRoomTypes roomType, int numberOfNights, boolean isWeekend, double reservationTotal) {
+    public Reservation(EnumRoomTypes roomType, int numberOfNights, boolean isWeekend) {
         this.roomType = roomType;
-        this.numberOfNights = numberOfNights;
         this.isWeekend = isWeekend;
-        this.reservationTotal = reservationTotal;
     }
 
     public EnumRoomTypes getRoomType() {
@@ -23,6 +20,10 @@ public class Reservation {
 
     public int getNumberOfNights() {
         return numberOfNights;
+    }
+
+    public  void setNumberOfNights(int numberOfNights) {
+        this.numberOfNights = numberOfNights;
     }
 
     public boolean isWeekend() {
@@ -38,12 +39,11 @@ public class Reservation {
         if (this.isWeekend) {
             price *= 1.1;
         }
-
         return price;
     }
 
     public double getReservationTotal() {
-        return reservationTotal;
+        return this.numberOfNights * getPrice();
     }
 
 }
