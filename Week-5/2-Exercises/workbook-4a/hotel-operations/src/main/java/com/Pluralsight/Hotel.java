@@ -1,38 +1,45 @@
 package com.Pluralsight;
 
 public class Hotel {
-    private EnumRoomTypes roomType;
-    private String name;
-    private int numberOfSuites;
-    private int numberOfRooms;
+    private final String name;
+    private final int numberOfSuites;
+    private final int numberOfRooms;
     private int bookedSuites;
     private int bookedRooms;
 
-    public Hotel () {
-        this.bookedSuites = 0;
-        this.bookedRooms = 0;
-    }
-
-    public Hotel(EnumRoomTypes roomType, String name, int numberOfSuites, int numberOfRooms, int bookedSuites, int bookedRooms) {
-        this.roomType = roomType;
+    public Hotel(String name, int numberOfSuites, int numberOfRooms, int bookedSuites, int bookedRooms) {
         this.name = name;
         this.numberOfSuites = numberOfSuites;
         this.numberOfRooms = numberOfRooms;
         this.bookedSuites = bookedSuites;
         this.bookedRooms = bookedRooms;
     }
+    public Hotel (String name, int numberOfSuites, int numberOfRooms) {
+       this(name, numberOfSuites, numberOfRooms, 0, 0);
+    }
 
     public boolean bookRoom(int roomCount, boolean suite) {
-        if (this.bookedRooms < roomCount) {
-            if (suite) {
-                this.bookedSuites++;
-                this.bookedRooms++;
-                return true;
-            }
-            this.bookedRooms++;
+        if (suite && roomCount <= getAvailableSuites()) {
+            bookedSuites += roomCount;
             return true;
         }
 
-        return false;
+        if (!suite && roomCount <= getAvailableRooms()) {
+            bookedRooms += roomCount;
+            return true;
+        }
+
+        return  false;
+    }
+
+    public String getName() {
+        return name;
+    }
+    public int getAvailableRooms() {
+        return this.numberOfRooms - this.bookedRooms;
+    }
+
+    public int getAvailableSuites() {
+        return this.numberOfSuites - this.bookedSuites;
     }
 }
