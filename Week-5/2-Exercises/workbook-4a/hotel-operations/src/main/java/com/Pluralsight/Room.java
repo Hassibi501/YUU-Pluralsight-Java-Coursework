@@ -29,7 +29,6 @@ public class Room {
         return isDirty;
     }
 
-
     public void checkIn() {
         this.isOccupied = true;
         this.isDirty = true;
